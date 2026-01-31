@@ -51,7 +51,7 @@ class CatSerializer(serializers.ModelSerializer):
             'id', 'name', 'color', 'birth_year', 'achievements', 'owner',
             'age',
             'image'
-            )
+        )
         read_only_fields = ('owner',)
 
     def get_age(self, obj):
@@ -67,10 +67,10 @@ class CatSerializer(serializers.ModelSerializer):
             for achievement in achievements:
                 current_achievement, _ = Achievement.objects.get_or_create(
                     **achievement
-                    )
+                )
                 AchievementCat.objects.create(
                     achievement=current_achievement, cat=cat
-                    )
+                )
             return cat
 
     def update(self, instance, validated_data):
@@ -78,7 +78,7 @@ class CatSerializer(serializers.ModelSerializer):
         instance.color = validated_data.get('color', instance.color)
         instance.birth_year = validated_data.get(
             'birth_year', instance.birth_year
-            )
+        )
         instance.image = validated_data.get('image', instance.image)
         if 'achievements' in validated_data:
             achievements_data = validated_data.pop('achievements')
