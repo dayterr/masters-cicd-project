@@ -146,7 +146,7 @@ jobs:
         host: ${{ secrets.HOST }}
         username: ${{ secrets.USER }}
         key: ${{ secrets.SSH_KEY }}
-        source: "docker-compose.prod.yml"
+        source: "docker-compose.production.yml"
         script: |
           cd kittygram
           touch .env 
@@ -156,12 +156,12 @@ jobs:
           echo DB_HOST=${{ secrets.DB_HOST }} >> .env
           echo DB_PORT=${{ secrets.DB_PORT }} >> .env
 
-          sudo docker-compose -f docker-compose.prod.yml pull
-          sudo docker-compose -f docker-compose.prod.yml down
-          sudo docker-compose -f docker-compose.prod.yml up -d
-          sudo docker-compose -f docker-compose.prod.yml exec backend python manage.py migrate
-          sudo docker-compose -f docker-compose.prod.yml exec backend python manage.py collectstatic
-          sudo docker-compose -f docker-compose.prod.yml exec backend cp -r /app/static_backend/. /backend_static/static/
+          sudo docker-compose -f docker-compose.production.yml pull
+          sudo docker-compose -f docker-compose.production.yml down
+          sudo docker-compose -f docker-compose.production.yml up -d
+          sudo docker-compose -f docker-compose.production.yml exec backend python manage.py migrate
+          sudo docker-compose -f docker-compose.production.yml exec backend python manage.py collectstatic
+          sudo docker-compose -f docker-compose.production.yml exec backend cp -r /app/static_backend/. /backend_static/static/
 
   send_message:
     runs-on: ubuntu-latest
